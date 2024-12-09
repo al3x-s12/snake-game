@@ -58,6 +58,30 @@ public class Board extends JPanel implements ActionListener {
         initGame();
     }
 
+    public int get_current_snake_size(){
+        return current_snake_size;
+    }
+
+    public int[] get_x(){
+        return x;
+    }
+
+    public int[] get_y(){
+        return y;
+    }
+
+    public int get_apple_x(){
+        return apple_x;
+    }
+
+    public int get_apple_y(){
+        return apple_y;
+    }
+
+    public Timer get_timer(){
+        return timer;
+    }
+
     private void loadImages() {
 
         ImageIcon iid = new ImageIcon("src/resources/dot.png");
