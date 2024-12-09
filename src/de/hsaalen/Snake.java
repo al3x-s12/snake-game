@@ -49,13 +49,16 @@ public class Snake {
         positions.add( 0, new_head_position );
     }
     
-    public boolean is_snake_colliding( int board_width_in_pixels, int board_height_in_pixels )
-    {
-        if ( is_colliding_with_itself() )
-            return true;
-        if ( is_outside_board( board_width_in_pixels, board_height_in_pixels ) )
-            return true;			
-        return false;
+    public boolean is_snake_colliding(int board_width_in_pixels, int board_height_in_pixels) {
+        return hasSelfCollision() || isOutOfBounds(board_width_in_pixels, board_height_in_pixels);
+    }
+    
+    private boolean hasSelfCollision() {
+        return is_colliding_with_itself();
+    }
+    
+    private boolean isOutOfBounds(int board_width_in_pixels, int board_height_in_pixels) {
+        return is_outside_board(board_width_in_pixels, board_height_in_pixels);
     }
 
     public boolean is_colliding_with_itself()
