@@ -45,11 +45,11 @@ public class BoardTest {
 
         Board board = new Board();
         board.place_snake_at_initial_location();
-        assertTrue(board.get_apple_x() >= 0);
-        assertTrue(board.get_apple_x() < board.maximum_tile_index_x() * board.tile_size_in_pixels);
+        assertTrue(board.get_apple().get_position().x >= 0);
+        assertTrue(board.get_apple().get_position().x < board.maximum_tile_index_x() * board.tile_size_in_pixels);
 
-        assertTrue(board.get_apple_y() >= 0);
-        assertTrue(board.get_apple_y() < board.maximum_tile_index_y() * board.tile_size_in_pixels);
+        assertTrue(board.get_apple().get_position().y >= 0);
+        assertTrue(board.get_apple().get_position().y < board.maximum_tile_index_y() * board.tile_size_in_pixels);
     }
 
     @Test

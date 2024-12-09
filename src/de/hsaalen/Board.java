@@ -27,15 +27,13 @@ public class Board extends JPanel implements ActionListener {
     public Snake snake;
 
     private int current_snake_size;
-    private int apple_x;
-    private int apple_y;
+    private Apple apple;
 
     private Direction direction = Direction.right;
     private boolean inGame = true;
 
     private Timer timer;
     private Image ball;
-    private Image apple;
     private Image head;
 
     public Board() {
@@ -58,12 +56,8 @@ public class Board extends JPanel implements ActionListener {
         return current_snake_size;
     }
 
-    public int get_apple_x(){
-        return apple_x;
-    }
-
-    public int get_apple_y(){
-        return apple_y;
+    public Apple get_apple(){
+        return apple;
     }
 
     public Timer get_timer(){
@@ -76,7 +70,7 @@ public class Board extends JPanel implements ActionListener {
         ball = iid.getImage();
 
         ImageIcon iia = new ImageIcon("src/resources/apple.png");
-        apple = iia.getImage();
+        Apple.image = iia.getImage();
 
         ImageIcon iih = new ImageIcon("src/resources/head.png");
         head = iih.getImage();
@@ -106,7 +100,7 @@ public class Board extends JPanel implements ActionListener {
         
         if (inGame) {
 
-            g.drawImage(apple, apple_x, apple_y, this);
+            g.drawImage(Apple.image, apple.get_position().x, apple.get_position().y, this);
 
             for (int i = 0; i < snake.length(); i++) {
                 if (i == 0) {
@@ -137,7 +131,7 @@ public class Board extends JPanel implements ActionListener {
 
     private void checkApple() 
 	{
-        if ((snake.head_position().x == apple_x) && (snake.head_position().y == apple_y)) 
+        if ((snake.head_position().x == apple.get_position().x) && (snake.head_position().y == apple.get_position().y)) 
 		{
 			snake.grow( direction );
             place_apple_at_random_location();
@@ -177,10 +171,12 @@ public class Board extends JPanel implements ActionListener {
     private void place_apple_at_random_location() {
 
         int r = (int) (Math.random() * maximum_tile_index_x());
-        apple_x = ((r * tile_size_in_pixels));
+        int apple_x = ((r * tile_size_in_pixels));
 
         r = (int) (Math.random() * maximum_tile_index_y());
-        apple_y = ((r * tile_size_in_pixels));
+        int apple_y = ((r * tile_size_in_pixels));
+
+        apple = new Apple(tile_size_in_pixels, apple_x, apple_y);
     }
 
     @Override
