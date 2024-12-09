@@ -53,11 +53,11 @@ public class Snake {
         return hasSelfCollision() || isOutOfBounds(board_width_in_pixels, board_height_in_pixels);
     }
     
-    private boolean hasSelfCollision() {
+    public boolean hasSelfCollision() {
         return is_colliding_with_itself();
     }
     
-    private boolean isOutOfBounds(int board_width_in_pixels, int board_height_in_pixels) {
+    public boolean isOutOfBounds(int board_width_in_pixels, int board_height_in_pixels) {
         return is_outside_board(board_width_in_pixels, board_height_in_pixels);
     }
 

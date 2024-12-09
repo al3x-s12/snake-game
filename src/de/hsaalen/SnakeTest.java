@@ -3,6 +3,8 @@ package de.hsaalen;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import java.beans.Transient;
+
 public class SnakeTest 
 {
 	@Test
@@ -40,17 +42,24 @@ public class SnakeTest
 		assertEquals(50, snake.position(2).x);
 		assertEquals(50, snake.position(2).y);		
 	}
-	
+
 	@Test
-	public void test_is_colliding_with_itself()
+	public void test_isOutOfBounds()
 	{
 		Snake snake = new Snake( 3, 10 );
-		assertFalse( snake.is_colliding_with_itself() );		
+		assertFalse( snake.isOutOfBounds(300, 300) );
+	}
+
+	@Test
+	public void test_hasSelfCollition()
+	{
+		Snake snake = new Snake( 3, 10 );
 		snake.grow( Direction.up );
 		snake.grow( Direction.left );
 		snake.move( Direction.down );
-		assertTrue( snake.is_colliding_with_itself() );		
+		assertTrue( snake.hasSelfCollision());		
 	}
+
 	@Test
 	public void test_is_outside_board()
 	{
