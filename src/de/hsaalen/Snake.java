@@ -33,15 +33,14 @@ public class Snake {
         }		
     }
     
-    public void move( Direction direction )
-    {
-        for ( int i = length()-1; i > 0; i-- )
-        {
-            position( i ).x = position( i-1 ).x;
-            position( i ).y = position( i-1 ).y;
-        }
-        head_position().move( direction, tile_size_in_pixels );
+    public void move(Direction direction) {
+        IntPair newHeadPosition = head_position().clone();
+        newHeadPosition.move(direction, tile_size_in_pixels);
+    
+        positions.add(0, newHeadPosition);
+        positions.remove(positions.size() - 1);
     }
+    
     
     public void grow( Direction direction )
     {
