@@ -20,6 +20,7 @@ public class SnakeTest
 		assertEquals( coordinate.x, 30 );
 		assertEquals( coordinate.y, 50 );
 	}
+
 	@Test
 	public void test_move_snake()
 	{
@@ -27,11 +28,17 @@ public class SnakeTest
 		snake.move( Direction.up );
 		snake.move( Direction.up );
 		
-		IntPair coordinate = snake.position(0);
-		assertEquals( coordinate.x, 50 );
-		assertEquals( coordinate.y, 30 );
-		assertEquals( snake.length(), 3 );
-		
+		IntPair head_position = snake.head_position();
+		assertEquals( 50, head_position.x);
+		assertEquals( 30, head_position.y);
+
+		assertEquals( 3, snake.length() );
+
+		assertEquals(50, snake.position(1).x);
+		assertEquals(40, snake.position(1).y);
+
+		assertEquals(50, snake.position(2).x);
+		assertEquals(50, snake.position(2).y);		
 	}
 	
 	@Test
