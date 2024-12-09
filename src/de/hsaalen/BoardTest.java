@@ -31,14 +31,13 @@ public class BoardTest {
     public void test_place_snake_at_initial_location(){
         Board board = new Board();
         board.place_snake_at_initial_location();
-        assertEquals(board.get_current_snake_size(), 3);
-        assertEquals(board.get_x()[0], 50);
-        assertEquals(board.get_x()[1], 40);
-        assertEquals(board.get_x()[2], 30);
+        assertEquals(board.snake.position(0).x, 50);
+        assertEquals(board.snake.position(1).x, 40);
+        assertEquals(board.snake.position(2).x, 30);
 
-        assertEquals(board.get_y()[0], 50);
-        assertEquals(board.get_y()[1], 50);
-        assertEquals(board.get_y()[2], 50);
+        assertEquals(board.snake.position(0).y, 50);
+        assertEquals(board.snake.position(1).y, 50);
+        assertEquals(board.snake.position(2).y, 50);
     }
 
     @Test
