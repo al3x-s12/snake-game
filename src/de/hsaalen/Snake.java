@@ -44,9 +44,18 @@ public class Snake {
     
     public void grow( Direction direction )
     {
-        IntPair new_head_position = head_position().clone();
-        new_head_position.move( direction, tile_size_in_pixels );
-        positions.add( 0, new_head_position );
+        if(Board.counter_apple % 5 == 0){
+            for(int i = 0; i<3; i++){
+                IntPair new_head_position = head_position().clone();
+                new_head_position.move( direction, tile_size_in_pixels );
+                positions.add( 0, new_head_position );
+            }
+        }
+        else{
+            IntPair new_head_position = head_position().clone();
+            new_head_position.move( direction, tile_size_in_pixels );
+            positions.add( 0, new_head_position );
+        }
     }
     
     public boolean is_snake_colliding(int board_width_in_pixels, int board_height_in_pixels) {

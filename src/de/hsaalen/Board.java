@@ -36,6 +36,8 @@ public class Board extends JPanel implements ActionListener {
     private Image ball;
     private Image head;
 
+    public static int counter_apple = 0;
+
     public Board() {
         
         initBoard();
@@ -74,6 +76,14 @@ public class Board extends JPanel implements ActionListener {
 
         ImageIcon iih = new ImageIcon("src/resources/head.png");
         head = iih.getImage();
+    }
+
+    private void switch_apple_image(){
+        ImageIcon iia = new ImageIcon("src/resources/apple.png");
+        ImageIcon iisa = new ImageIcon("src/resources/apple_red.png");
+
+        if(counter_apple % 5 == 0) Apple.image = iisa.getImage();
+        else Apple.image = iia.getImage();
     }
 
     private void initGame() {
@@ -176,7 +186,9 @@ public class Board extends JPanel implements ActionListener {
         r = (int) (Math.random() * maximum_tile_index_y());
         int apple_y = ((r * tile_size_in_pixels));
 
+        counter_apple++;
         apple = new Apple(tile_size_in_pixels, apple_x, apple_y);
+        switch_apple_image();
     }
 
     @Override
