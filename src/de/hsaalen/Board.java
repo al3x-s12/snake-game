@@ -28,6 +28,7 @@ public class Board extends JPanel implements ActionListener {
 
     private int current_snake_size;
     private Apple apple;
+    private Obstacles obstacles;
 
     private Direction direction = Direction.right;
     private boolean inGame = true;
@@ -88,9 +89,15 @@ public class Board extends JPanel implements ActionListener {
 
     private void initGame() {
 
-        place_snake_at_initial_location();        
+        place_snake_at_initial_location();    
+        initObstacles();    
         place_apple_at_random_location();
 		start_game_loop_timer();
+    }
+
+    private void initObstacles() {
+        obstacles = new Obstacles(tile_size_in_pixels);
+        obstacles.placeRandomObstacles(10, width_in_pixels, height_in_pixels);
     }
 
     public void start_game_loop_timer()
@@ -119,6 +126,8 @@ public class Board extends JPanel implements ActionListener {
                     g.drawImage(ball, snake.position(i).x, snake.position(i).y, this);
                 }
             }
+
+            obstacles.renderObstacles(g, ball);
 
             Toolkit.getDefaultToolkit().sync();
 
@@ -157,6 +166,10 @@ public class Board extends JPanel implements ActionListener {
 	{
 		if ( snake.is_snake_colliding( width_in_pixels, height_in_pixels) )
 			inGame = false;
+
+        if(obstacles.isCollidingWith(snake.head_position().x, snake.head_position().y)){
+            inGame = false;
+        }
 		
         if (!inGame) {
             timer.stop();
@@ -180,11 +193,25 @@ public class Board extends JPanel implements ActionListener {
 
     private void place_apple_at_random_location() {
 
-        int r = (int) (Math.random() * maximum_tile_index_x());
-        int apple_x = ((r * tile_size_in_pixels));
+        int apple_x, apple_y;
+        boolean isValidPosition;
 
-        r = (int) (Math.random() * maximum_tile_index_y());
-        int apple_y = ((r * tile_size_in_pixels));
+        do{
+
+            int r = (int) (Math.random() * maximum_tile_index_x());
+            apple_x = ((r * tile_size_in_pixels));
+
+            r = (int) (Math.random() * maximum_tile_index_y());
+            apple_y = ((r * tile_size_in_pixels));
+
+            isValidPosition = true;
+            for(int i =0; i < obstacles.length(); i++){
+                if(obstacles.position(i).x == apple_x && obstacles.position(i).y == apple_y){
+                    isValidPosition = false;
+                    break;
+                }
+            }
+        }while(!isValidPosition);
 
         counter_apple++;
         apple = new Apple(tile_size_in_pixels, apple_x, apple_y);
