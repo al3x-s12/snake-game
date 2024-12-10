@@ -7,7 +7,7 @@ import org.junit.runner.notification.Failure;
 public class TestRunner {
    public static void main(String[] args) 
    {
-      Result result = JUnitCore.runClasses(BoardTest.class, SnakeTest.class, AppleTest.class);
+      Result result = JUnitCore.runClasses(BoardTest.class, SnakeTest.class, AppleTest.class, ObstaclesTest.class);
 		
       int i = 0;
       for ( Failure failure : result.getFailures() ) {
